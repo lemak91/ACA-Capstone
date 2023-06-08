@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AppBar, Toolbar, IconButton, Typography, Box } from "@mui/material";
 import cookie from "cookie";
 import MenuIcon from "@mui/icons-material/Menu";
-import Logo from '../images/discogsh.svg';
+import Logo from '../images/discogsf.svg';
 
 
 const Navigation = () => {
