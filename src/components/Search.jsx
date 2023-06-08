@@ -13,7 +13,7 @@ function Search() {
   const [query, setQuery] = useState("");
 
   return (
-    <div style={{minWidth: "90%",}}>
+    <div style={{ minWidth: "90%" }}>
       <div
         style={{
           display: "flex",
@@ -33,8 +33,19 @@ function Search() {
           Search through Discogs database of records and add them to your
           collection!
         </div>
-        <div style={{ margin: 20 }}>
+        <div className="Search" style={{ margin: 20 }}>
           <input
+            style={{
+              width: 350,
+              border: "3px solid",
+              background: "transparent",
+              padding: "15px 30px",
+              borderRadius: "50px",
+              outline: "none",
+              fontSize: "18px",
+              fontWeight: "bold",
+              letterSpacing: "1px",
+            }}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           ></input>
@@ -78,11 +89,14 @@ function Search() {
               <Box
                 sx={{
                   "& > :not(style)": {
-                    m: -.001,
+                    m: -0.001,
                   },
                 }}
               >
-                <Icon sx={{margin: 'none',}}>add_circle</Icon> <p style={{fontSize: 17, display: 'inline'}}>Add to Collection</p>
+                <Icon sx={{ margin: "none" }}>add_circle</Icon>{" "}
+                <p style={{ fontSize: 17, display: "inline" }}>
+                  Add to Collection
+                </p>
               </Box>
             </div>
           ))}
