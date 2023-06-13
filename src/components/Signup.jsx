@@ -39,7 +39,7 @@ const Signup = () => {
   const signup = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:4000/auth/signup", {
+      .post("https://capstone-discogs.onrender.com/auth/signup", {
         firstName: state.firstName,
         lastName: state.lastName,
         email: state.email,

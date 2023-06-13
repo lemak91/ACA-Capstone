@@ -89,7 +89,7 @@ function Search() {
               }}
               onClick={async () => {
                 const resp = await fetch(
-                  `http://localhost:4000/search?artist=${query}`
+                  `https://capstone-discogs.onrender.com/search?artist=${query}`
                 );
                 const json = await resp.json();
                 console.log(json.resp.results);
@@ -140,13 +140,16 @@ function Search() {
                     // const release = searchResult.find(
                     //   (release) => release.id === item.id
                     // );
-                    const resp = await fetch(`http://localhost:4000/release`, {
-                      method: "POST", // or 'PUT'
-                      headers: {
-                        "Content-Type": "application/json",
-                      },
-                      body: JSON.stringify(item),
-                    });
+                    const resp = await fetch(
+                      `https://capstone-discogs.onrender.com/release`,
+                      {
+                        method: "POST", // or 'PUT'
+                        headers: {
+                          "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(item),
+                      }
+                    );
                     const json = await resp.json();
                     // console.log(json.resp.results);
                   }}

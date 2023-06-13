@@ -22,19 +22,19 @@ const Login = () => {
   const login = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:4000/auth/login", {
+      .post("https://capstone-discogs.onrender.com/auth/login", {
         email: state.email,
         password: state.password,
       })
       .then((res) => {
         console.log(res.data.data);
         document.cookie = `loggedIn=true;max-age=60*1000`;
-        localStorage.setItem('user', JSON.stringify(res.data.data));
+        localStorage.setItem("user", JSON.stringify(res.data.data));
         navigate("/");
       })
       .catch((err) => {
         console.log(err);
-        setErrorMsg('User/Password not found...')
+        setErrorMsg("User/Password not found...");
       });
   };
 

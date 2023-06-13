@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 function Collectionfetch() {
   const [collection, setCollection] = useState([]);
   const getCollection = async () => {
-    const resp = await fetch(`http://localhost:4000/release`);
+    const resp = await fetch(`https://capstone-discogs.onrender.com/release`);
     const json = await resp.json();
     // console.log(json.resp.results);
     setCollection(json);
