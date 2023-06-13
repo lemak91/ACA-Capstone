@@ -23,8 +23,9 @@ const Router = () => {
   return (
     <Routes>
       <Route path="/" element={<ProtectedRoute component={Home} />} />
+      <Route path="/collection" element={<ProtectedRoute component={Collection} />} />
       {/* <Route path="/" element={<Home />} /> */}
-      <Route path="/collection" element={<Collection />} />
+      {/* <Route path="/collection" element={<Collection />} /> */}
       <Route path="/signup" element={<Signup />} />
       <Route path="/login" element={<Login />} />
     </Routes>
