@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Routes, Route, Navigate } from "react-router";
 import Home from "./components/Home";
+import Collection from "./components/Collection";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import cookie from "cookie";
@@ -21,8 +22,9 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
 const Router = () => {
   return (
     <Routes>
-      {/* <Route path="/" element={<ProtectedRoute component={Home} />} /> */}
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<ProtectedRoute component={Home} />} />
+      {/* <Route path="/" element={<Home />} /> */}
+      <Route path="/collection" element={<Collection />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/login" element={<Login />} />
     </Routes>

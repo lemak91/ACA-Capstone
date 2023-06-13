@@ -1,50 +1,58 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { TextField, Button, Container } from "@mui/material";
-// import axios from "axios";
+import axios from "axios";
 
 
 const Signup = () => {
   const navigate = useNavigate();
 
   const [state, setState] = useState({
-    name: "",
-    username: "",
+    firstName: "",
+    lastName: "",
+    email: "",
     password: "",
   });
 
   const handleTextChange = (e) => {
-    const { name, value } = e.target;
-    setState((prevState) => {
-      return {
-        ...prevState,
-        [name]: value,
-      };
-    });
+    const newRegistration = { ...state };
+    newRegistration[e.target.name] = e.target.value;
+    setState(newRegistration);
+    // const { name, value } = e.target;
+    // setState((prevState) => {
+    //   return {
+    //     ...prevState,
+    //     [name]: value,
+    //   };
+    // });
   };
 
-    const signup = (e) => {
-      e.preventDefault();
-      document.cookie = `loggedIn=true;max-age=60*1000`;
-      // set cookie here
-      // set loggedIn = true and max-age = 60*1000 (one minute)
+    // const signup = (e) => {
+    //   e.preventDefault();
+    //   document.cookie = `loggedIn=true;max-age=60*1000`;
+    //   // set cookie here
+    //   // set loggedIn = true and max-age = 60*1000 (one minute)
 
-      navigate("/login");
-    };
+    //   navigate("/login");
+    // };
 
-  // const signup = (e) => {
-  //   e.preventDefault();
-  //   axios.post("http://localhost:4000", {
-  //     name: state.name,
-  //     username: state.username,
-  //     password: state.password
-  //   }).then(res => {
-  //     console.log(res)
-  //     navigate("/login");
-  //   }).catch(err => {
-  //     console.log(err)
-  //   })
-  // };
+  const signup = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:4000/auth/signup", {
+        firstName: state.firstName,
+        lastName: state.lastName,
+        email: state.email,
+        password: state.password,
+      })
+      .then((res) => {
+        console.log(res);
+        navigate("/login");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div className="App">
@@ -52,17 +60,26 @@ const Signup = () => {
         <form className="login-form" onSubmit={signup}>
           <TextField
             required
-            label="Enter your full name here"
-            value={state.name}
+            label="Enter First Name Here"
+            value={state.firstName}
             onChange={handleTextChange}
-            name="name"
+            name="firstName"
+            type="text"
+          />
+
+          <TextField
+            required
+            label="Enter Last Name Here"
+            value={state.lastName}
+            onChange={handleTextChange}
+            name="lastName"
             type="text"
           />
           <TextField
             required
             onChange={handleTextChange}
-            value={state.username}
-            name="username"
+            value={state.email}
+            name="email"
             label="Enter your Email here"
             type="text"
           />
@@ -84,6 +101,14 @@ const Signup = () => {
           </Button>
         </form>
       </Container>
+      <p
+        style={{
+          fontSize: "20px",
+          fontWeight: "bold",
+        }}
+      >
+        Already registered, <Link to="/login">Login Here</Link>
+      </p>
     </div>
   );
 };

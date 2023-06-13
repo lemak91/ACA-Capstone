@@ -10,7 +10,8 @@ function Home() {
           display: "flex",
           flexDirection: "row",
           minWidth: "100%",
-          minHeight: 1000
+          minHeight: 1000,
+          flexWarp: 'wrap'
         }}
       >
         <Sidebar />

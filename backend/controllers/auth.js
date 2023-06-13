@@ -9,10 +9,10 @@ const saltRounds = 10;
 
 const signup = (req, res) => {
   // const { FirstName, LastName, Email, PW} = req.body
-  const firstName = req.body.FirstName;
-  const lastName = req.body.LastName;
-  const email = req.body.Email;
-  const password = req.body.PW;
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
+  const email = req.body.email;
+  const password = req.body.password;
   let sql =
     "INSERT INTO users (FirstName, LastName, Email, PW) VALUES (?, ?, ?, ?)";
 
@@ -41,15 +41,15 @@ const signup = (req, res) => {
 };
 
 const login = (req, res) => {
-  const { Email, PW } = req.body;
+  const { email, password } = req.body;
   let sql = "SELECT * FROM users WHERE Email = ?";
-  sql = mysql.format(sql, [Email]);
+  sql = mysql.format(sql, [email]);
 
   pool.query(sql, (err, rows) => {
     if (err) return handleSQLError(res, err);
     if (!rows.length) return res.status(404).send("No matching users");
 
-    const hash = rows[0].password;
+    const hash = rows[0].PW;
     bcrypt.compare(password, hash).then((result) => {
       if (!result) return res.status(400).send("Invalid password");
 
@@ -60,6 +60,7 @@ const login = (req, res) => {
       res.json({
         msg: "Login successful",
         token,
+        data,
       });
     });
   });

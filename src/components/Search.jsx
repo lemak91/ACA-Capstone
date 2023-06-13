@@ -11,6 +11,15 @@ import "../Search.css";
 function Search() {
   const [searchResult, setSearchResult] = useState([]);
   const [query, setQuery] = useState("");
+  // const [release, setRelease] = useState({})
+
+  // const getRelease = (selectedRelease) => {
+  //   const addRelease = searchResult.find(release => release.id === selectedRelease)
+  //   return addRelease
+  //   // setRelease(addRelease)
+  // }
+
+  // console.log(release)
 
   return (
     <div style={{ minWidth: "90%" }}>
@@ -33,36 +42,64 @@ function Search() {
           Search through Discogs database of records and add them to your
           collection!
         </div>
-        <div className="Search" style={{ margin: 20 }}>
-          <input
+        <div
+          className="Search"
+          style={{
+            display: "flex",
+            margin: 20,
+            flexShrink: 0,
+          }}
+        >
+          <div
             style={{
-              width: 350,
-              border: "3px solid",
-              background: "transparent",
-              padding: "15px 30px",
-              borderRadius: "50px",
-              outline: "none",
-              fontSize: "18px",
-              fontWeight: "bold",
-              letterSpacing: "1px",
-            }}
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-          ></input>
-          <button
-            style={{ marginLeft: "10px" }}
-            onClick={async () => {
-              const resp = await fetch(
-                `http://localhost:4000/search?artist=${query}`
-              );
-              const json = await resp.json();
-              console.log(json.resp.results);
-              setSearchResult([...json.resp.results]);
-              // console.log(searchResult);
+              display: "flex",
+              margin: 20,
+              flexShrink: 0,
             }}
           >
-            Search
-          </button>
+            <input
+              style={{
+                flex: 1,
+                alignContent: "center",
+                width: 350,
+                border: "3px solid",
+                background: "transparent",
+                padding: "15px 30px",
+                borderRadius: "50px",
+                outline: "none",
+                fontSize: "18px",
+                fontWeight: "bold",
+                letterSpacing: "1px",
+                flexBasis: 800,
+                flexShrink: 1,
+              }}
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            ></input>
+            <button
+              style={{
+                flex: 1,
+                marginLeft: "10px",
+                background: "transparent",
+                border: "3px solid",
+                borderRadius: "50px",
+                fontWeight: "bold",
+                flexBasis: 200,
+                flexShrink: 1,
+              }}
+              onClick={async () => {
+                const resp = await fetch(
+                  `http://localhost:4000/search?artist=${query}`
+                );
+                const json = await resp.json();
+                console.log(json.resp.results);
+                setSearchResult([...json.resp.results]);
+                // console.log(searchResult);
+              }}
+            >
+              Search
+            </button>
+          </div>
         </div>
 
         <div
@@ -79,8 +116,11 @@ function Search() {
                 justifyContent: "center",
                 alignItems: "center",
                 alignContent: "center",
-                fontSize: "32px",
+                fontSize: "22px",
                 fontWeight: "bold",
+                border: "1px solid black",
+                margin: 1,
+                padding: 10,
               }}
               key={item.id}
             >
@@ -93,7 +133,26 @@ function Search() {
                   },
                 }}
               >
-                <Icon sx={{ margin: "none" }}>add_circle</Icon>{" "}
+                <Icon
+                  sx={{ margin: "none" }}
+                  onClick={async () => {
+                    // const release = getRelease(item.id)
+                    // const release = searchResult.find(
+                    //   (release) => release.id === item.id
+                    // );
+                    const resp = await fetch(`http://localhost:4000/release`, {
+                      method: "POST", // or 'PUT'
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify(item),
+                    });
+                    const json = await resp.json();
+                    // console.log(json.resp.results);
+                  }}
+                >
+                  add_circle
+                </Icon>{" "}
                 <p style={{ fontSize: 17, display: "inline" }}>
                   Add to Collection
                 </p>

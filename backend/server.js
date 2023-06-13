@@ -11,6 +11,7 @@ require("dotenv").config();
 const express = require("express");
 const usersRouter = require("./routers/users");
 const authRouter = require("./routers/auth");
+const releaseRouter = require("./routers/addrelease");
 const axios = require("axios");
 const cors = require("cors");
 // const { logger } = require("./middleware");
@@ -35,10 +36,14 @@ app.get("/search", async (req, res) => {
   res.json({ resp: resp.data });
 });
 
+
 app.use(express.json());
 // app.use(logger);
 app.use("/users", usersRouter);
 app.use("/auth", authRouter);
+app.use("/release", releaseRouter);
+
+
 
 app.get("/", (req, res) => {
   res.send("Welcome to our server!");
