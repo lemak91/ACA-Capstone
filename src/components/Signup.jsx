@@ -107,7 +107,7 @@ const Signup = () => {
           fontWeight: "bold",
         }}
       >
-        Already registered, <Link to="/login">Login Here</Link>
+        Already registered, <Link style={{color: "blue"}} to="/login">Login Here</Link>
       </p>
     </div>
   );

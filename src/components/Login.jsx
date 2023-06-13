@@ -69,11 +69,16 @@ const Login = () => {
           {errorMsg ? <p>{errorMsg}</p> : null}
         </form>
       </Container>
-      <p style={{
-            fontSize: "20px",
-            fontWeight: "bold",
-          }}>
-        Havent registered, <Link to="/signup">Signup Here</Link>
+      <p
+        style={{
+          fontSize: "20px",
+          fontWeight: "bold",
+        }}
+      >
+        Havent registered,{" "}
+        <Link style={{ color: "blue" }} to="/signup">
+          Signup Here
+        </Link>
       </p>
     </div>
   );
